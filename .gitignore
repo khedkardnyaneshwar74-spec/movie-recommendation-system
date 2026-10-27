@@ -1,0 +1,16 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Gradio session states
+.gradio/
+
+# Local backup documentation/reports
+*.docx
+MoodMatcher_AI_Engine_Project_Report_Updated.md
+readme.txt
+
+# Design drafts and source images
+*.avif
+*.jpg
+*.png
