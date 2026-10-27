@@ -34,7 +34,8 @@ IMDb ratings or vote counts.
 The project exposes the Gradio interface as a FastAPI ASGI entrypoint in
 `app.py`; `vercel.json` routes incoming requests to that Python function.
 Connect this repository to Vercel and deploy from the repository root. Keep
-`u.item` in the repository because the app loads it during startup.
+`u.item` and both JPEG background assets in the repository; `vercel.json`
+explicitly includes them in the Python function bundle.
 
 ## How it works
 

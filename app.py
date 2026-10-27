@@ -13,9 +13,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 
-DATASET_PATH = Path(__file__).with_name("u.item")
-THEATER_IMAGE_PATH = Path(__file__).with_name("Untitled design (1).jpg")
-POSTER_IMAGE_PATH = Path(__file__).with_name("image_f0140cfc.jpg")
+BASE_DIR = Path(__file__).resolve().parent
+DATASET_PATH = BASE_DIR / "u.item"
+THEATER_IMAGE_PATH = BASE_DIR / "Untitled design (1).jpg"
+POSTER_IMAGE_PATH = BASE_DIR / "image_f0140cfc.jpg"
 GENRE_NAMES = [
     "unknown",
     "Action",

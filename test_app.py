@@ -11,6 +11,8 @@ from app import (
     GENRE_MODE,
     MOVIE_MODE,
     NETFLIX_THEME_CSS,
+    POSTER_IMAGE_PATH,
+    THEATER_IMAGE_PATH,
     MovieRecommender,
     app,
     create_app,
@@ -201,6 +203,12 @@ class MovieDataTests(unittest.TestCase):
 
     def test_vercel_entrypoint_is_fastapi_app(self) -> None:
         self.assertIsInstance(app, FastAPI)
+
+    def test_background_assets_use_absolute_paths(self) -> None:
+        for image_path in (THEATER_IMAGE_PATH, POSTER_IMAGE_PATH):
+            with self.subTest(image_path=image_path.name):
+                self.assertTrue(image_path.is_absolute())
+                self.assertTrue(image_path.is_file())
 
     def test_recommendation_output_is_safe_html(self) -> None:
         rendered = format_recommendations_html(

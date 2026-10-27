@@ -3,7 +3,14 @@
   "builds": [
     {
       "src": "app.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": [
+          "u.item",
+          "Untitled design (1).jpg",
+          "image_f0140cfc.jpg"
+        ]
+      }
     }
   ],
   "routes": [
