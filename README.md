@@ -29,6 +29,13 @@ again whenever you want to rebuild that catalog. It contains curated titles
 plus clearly labeled generated title variants; generated entries do not have
 IMDb ratings or vote counts.
 
+## Deploy to Vercel
+
+The project exposes the Gradio interface as a FastAPI ASGI entrypoint in
+`app.py`; `vercel.json` routes incoming requests to that Python function.
+Connect this repository to Vercel and deploy from the repository root. Keep
+`u.item` in the repository because the app loads it during startup.
+
 ## How it works
 
 1. Read the UTF-8 pipe-separated `u.item` file, including title, 19 genre flags,

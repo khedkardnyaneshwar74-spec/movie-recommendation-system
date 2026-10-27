@@ -5,12 +5,14 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pandas as pd
+from fastapi import FastAPI
 
 from app import (
     GENRE_MODE,
     MOVIE_MODE,
     NETFLIX_THEME_CSS,
     MovieRecommender,
+    app,
     create_app,
     format_recommendations_html,
     load_movies,
@@ -196,6 +198,9 @@ class MovieDataTests(unittest.TestCase):
             pd.DataFrame({"title": ["Toy Story (1995)"], "metadata": ["Animation Adventure"]})
         )
         self.assertIsNotNone(create_app(recommender))
+
+    def test_vercel_entrypoint_is_fastapi_app(self) -> None:
+        self.assertIsInstance(app, FastAPI)
 
     def test_recommendation_output_is_safe_html(self) -> None:
         rendered = format_recommendations_html(

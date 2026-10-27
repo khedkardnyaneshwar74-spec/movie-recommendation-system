@@ -8,6 +8,7 @@ from urllib.parse import quote
 import gradio as gr
 import numpy as np
 import pandas as pd
+from fastapi import FastAPI
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
@@ -545,10 +546,11 @@ def create_app(recommender: MovieRecommender) -> gr.Blocks:
     return demo
 
 
+gradio_interface = create_app(MovieRecommender(load_movies()))
+app = gr.mount_gradio_app(FastAPI(), gradio_interface, path="/")
+
+
 def main() -> None:
-    movies = load_movies()
-    recommender = MovieRecommender(movies)
-    demo = create_app(recommender)
     launch_options: dict[str, object] = {
         "share": False,
         "server_name": "127.0.0.1",
@@ -559,9 +561,9 @@ def main() -> None:
         launch_options["allowed_paths"] = [
             str(image_path) for image_path in BACKGROUND_IMAGE_PATHS
         ]
-    if "css" in inspect.signature(demo.launch).parameters:
+    if "css" in inspect.signature(gradio_interface.launch).parameters:
         launch_options["css"] = NETFLIX_THEME_CSS
-    demo.launch(**launch_options)
+    gradio_interface.launch(**launch_options)
 
 
 if __name__ == "__main__":
